@@ -1,11 +1,16 @@
+import { useState } from "react";
 import { Link, NavLink } from "react-router";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../assets/logo.png";
 
 export default function Navbar() {
-    const linkClass =
-        "hover:text-accent transition";
+    const [open, setOpen] = useState(false);
 
-    const activeClass =
+    const baseLink =
+        "block py-2 text-sm font-medium transition";
+    const desktopLink =
+        "hover:text-accent";
+    const activeLink =
         "text-accent font-semibold";
 
     return (
@@ -20,36 +25,64 @@ export default function Navbar() {
                     </span>
                 </Link>
 
-                {/* Navigation */}
+                {/* Desktop Nav */}
                 <nav className="hidden md:flex gap-6 text-sm font-medium">
-                    <NavLink
-                        to="/profil"
-                        className={({ isActive }) =>
-                            isActive ? activeClass : linkClass
-                        }
-                    >
-                        Profil
-                    </NavLink>
-
-                    <NavLink
-                        to="/ppdb"
-                        className={({ isActive }) =>
-                            isActive ? activeClass : linkClass
-                        }
-                    >
-                        PPDB
-                    </NavLink>
-
-                    <NavLink
-                        to="/berita"
-                        className={({ isActive }) =>
-                            isActive ? activeClass : linkClass
-                        }
-                    >
-                        Berita
-                    </NavLink>
+                    {[
+                        { to: "/profil", label: "Profil" },
+                        { to: "/ppdb", label: "PPDB" },
+                        { to: "/berita", label: "Berita" },
+                        { to: "/kontak", label: "Kontak" },
+                    ].map((item) => (
+                        <NavLink
+                            key={item.to}
+                            to={item.to}
+                            className={({ isActive }) =>
+                                isActive ? activeLink : desktopLink
+                            }
+                        >
+                            {item.label}
+                        </NavLink>
+                    ))}
                 </nav>
+
+                {/* Mobile Burger Button */}
+                <button
+                    onClick={() => setOpen(!open)}
+                    className="md:hidden focus:outline-none"
+                    aria-label="Toggle menu"
+                >
+                    {open ? (
+                        <XMarkIcon className="w-7 h-7" />
+                    ) : (
+                        <Bars3Icon className="w-7 h-7" />
+                    )}
+                </button>
             </div>
+
+            {/* Mobile Menu */}
+            {open && (
+                <div className="md:hidden bg-primary/95 border-t border-blue-800">
+                    <nav className="px-6 py-4 space-y-2">
+                        {[
+                            { to: "/profil", label: "Profil" },
+                            { to: "/ppdb", label: "PPDB" },
+                            { to: "/berita", label: "Berita" },
+                        ].map((item) => (
+                            <NavLink
+                                key={item.to}
+                                to={item.to}
+                                onClick={() => setOpen(false)}
+                                className={({ isActive }) =>
+                                    `${baseLink} ${isActive ? activeLink : "text-white"
+                                    }`
+                                }
+                            >
+                                {item.label}
+                            </NavLink>
+                        ))}
+                    </nav>
+                </div>
+            )}
         </header>
     );
 }

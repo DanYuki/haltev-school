@@ -13,17 +13,17 @@ export const announcements = [
 
 export const articles = [
     {
-        title: "Webinar TKA SMA Haltev",
+        title: "SMA Haltev Gelar Workshop Literasi Digital untuk Siswa",
         date: "30 Januari 2026",
         image: "https://placehold.co/120x80",
     },
     {
-        title: "SMA Haltev Mengikuti Pelatihan di Universitas",
+        title: "Tim Siswa SMA Haltev Raih Juara Lomba Presentasi Ilmiah",
         date: "24 Januari 2026",
         image: "https://placehold.co/120x80",
     },
     {
-        title: "Class Meet Gen-Z, Kolaboratif dan Kompetitif",
+        title: "SMA Haltev Adakan Parenting Class Bersama Wali Murid",
         date: "19 Desember 2025",
         image: "https://placehold.co/120x80",
     },
